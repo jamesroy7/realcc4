@@ -1,0 +1,236 @@
+//MICHAEL JAMES P ROY 
+//NA-2A
+import java.util.Arrays;
+import java.util.Scanner;
+public class Main
+{
+  static int count = 0;//initializing global variable count to 0
+  //this method is for displaying the array
+  public void Display (int[]nums)
+  {
+    System.out.println ("ORIGINAL ARRAY");
+    for (int i = 0; i < count; i++)
+      {
+	System.out.println ("INDEX[" + i + "]" + "=" + nums[i]);
+      }
+  }
+  //this method is for traversing the array
+  public void Traverse (int[]nums)
+  {
+
+
+    for (int i = 0; i < count; i++)
+      {
+	System.out.println ("INDEX[" + i + "]" + "=" + nums[i]);
+      }
+    System.out.println ("THE NUMBER OF ELEMENTS IS " + count);
+  }
+  //this method is for retrieving the inputed item by the user
+  //the method is String for the reason that we want to show if the item was found or notFound
+  public String Retrieve (int[]nums, int item)
+  {
+    String found, notFound;//decalaring found and not found variable to return
+    for (int i = 0; i < nums.length; i++)
+      {
+	if (nums[i] == item)
+	  {
+	    found = "ITEM FOUND AT:INDEX " + i; // initializing the found varibale if the array contains the item and returning it
+	    return found;
+	  }
+
+      }
+    notFound = "ITEM NOT FOUND";
+    return notFound;//returning notFound if the item is not found on the array
+  }
+  //this method is for updating the index or elemnt in array
+  public void Update (int[]nums, int item, int index)//parameters
+  {
+    for (int i = 0; i < count; i++)
+      {
+	if (i == index)
+	  {
+	    nums[i] = item;//overriding the indec to the item inputed by the user
+	  }
+      }
+      //displaying the updated array
+    System.out.println ("UPDATED ARRAY");
+    for (int j = 0; j < count; j++)
+      {
+
+	System.out.println ("INDEX[" + j + "]" + "=" + nums[j]);
+      }
+  }
+  //this method is for deleting an element
+  public void Delete (int[]nums, int pos, int size)//parameters
+  {
+
+    for (int i = pos; i < size - 1; i++)
+      {
+	nums[i] = nums[i + 1];//shifting of elements from rigth to left
+      }
+
+    count--;//initializing count = count - 1 or decreasing the size for display method 
+    //displaying the array after deletion
+    System.out.println ("ELEMENTS AFTER DELETING");
+    for (int i = 0; i < count; i++)
+      {
+
+	System.out.println ("INDEX[" + i + "]" + "=" + nums[i]);
+
+      }
+  }
+  //this is for inserting a elements in array
+  public void insert (int[]nums, int pos, int item)//parameters
+  {
+    
+    int[] newNums = new int[count + 1];//decalaring a new array called newNums with the size of count + 1
+
+    for (int i = 0; i < count; i++)// this is for copying the original array to new array
+      {
+	newNums[i] = nums[i];
+
+      }
+    for (int i = count; i > pos; i--)
+      {
+	newNums[i] = newNums[i - 1];//shifting elements from left to rigth 
+
+      }
+    newNums[pos] = item;//inserting the item in a given position
+    //this is for displaying the new array called newNums
+    System.out.println("ARRAY AFTER INSERTION");
+    for (int j = 0; j < newNums.length; j++)
+      {
+	System.out.println ("INDEX[" + j + "]" + "=" + newNums[j]);
+
+
+
+      }
+
+  }
+
+
+
+
+
+
+
+  public static void main (String[]args)
+  {
+
+    Scanner sc = new Scanner (System.in);
+    Main am = new Main ();//creating an object of the main class
+    //initializing the variables needed
+    int[] nums;
+    int size;
+    char choice;
+    boolean isEmpty = false;
+    boolean isFull = false;
+
+    do
+      {
+	System.out.println ("!!MAXIMUM OF 10!!");
+	System.out.println ("ARRAY SIZE:");
+	size = sc.nextInt ();
+	if (size <= 0)
+	  {
+	    isEmpty = true;//if the inputed size is 0 the isEmpty variable becomes true
+	  }
+	else if (size == 10)
+	  {
+
+	    isFull = true; //if the inputed size is 10 the isFull variable becomes true
+	  }
+
+
+      }
+    while ((size > 10));//the loop will continue while the inputed size is greater than 10
+    nums = new int[size];//initializing the array called nums with the size of size inputed by the user
+
+    System.out.println ("ENTER THE ELEMENTS:");
+
+    for (int i = 0; i < nums.length; i++)//this is for storing the elemnts
+      {
+	count++;//as the user storing the count will adding itself to 1
+	nums[i] = sc.nextInt ();
+      }
+    System.out.println ("ELEMENTS STORED");
+
+
+
+   //do while loop in order to user to use again the array operations
+    do
+      {
+	System.out.println ("ARRAY OPERATIONS");
+	System.out.
+	  println
+	  ("[1]TRAVERSE\n[2]RETRIEVE\n[3]UPDATE\n[4]DELETE\n[5]INSERT\n[6]EXIT");
+	int ch = sc.nextInt ();
+
+	switch (ch)
+	  {
+	  case 1:
+	    am.Traverse (nums);//calling the traverse method
+	    break;
+	  case 2:
+	    System.out.println ("ITEM YOU WANT TO RETRIEVE:");
+	    int item = sc.nextInt ();
+	    System.out.println (am.Retrieve (nums, item));//calling the Retrieve method
+
+	    break;
+	  case 3:
+	    am.Display (nums);//calling display method
+	    System.out.println ("INDEX YOU WANT TO UPDATE:");
+	    int index = sc.nextInt ();
+	    System.out.println ("ITEM:");
+	    int Updateditem = sc.nextInt ();
+	    am.Update (nums, Updateditem, index);//calling update method
+      break;
+	  case 4:
+	    if (isEmpty)
+	      {
+		System.out.println ("ARRAY IS EMPTY");
+		break;
+	      }
+	    am.Display (nums);//calling display method
+	    System.out.println ("INDEX YOU WANT TO DELETE:");
+	    int deletedIndex = sc.nextInt ();
+	    am.Delete (nums, deletedIndex, size);//calling delete method
+	    break;
+	  case 5:
+	    if (isFull)
+	      {
+		System.out.
+		  println
+		  ("ARRAY IS FULL, THE LAST ELEMENT WILL POSSIBLY DELETED");
+		break;
+	      }
+	    am.Display (nums);//calling display method
+	    System.out.println ("INDEX YOU WANT TO INSERT:");
+	    int insertedIndex = sc.nextInt ();
+	     if ((insertedIndex < 0) || (insertedIndex > count))
+      {
+	System.out.println ("INDEX OUT OF BOUNDS");
+     break;
+      }
+	    System.out.println ("ITEM:");
+	    int insertedItem = sc.nextInt ();
+	    am.insert (nums, insertedIndex, insertedItem);//calling insert method
+
+	    break;
+	    case 6:
+	        System.exit(0);//the program will terminate 
+	  default:
+	    System.out.println ("INVALID OPERATIONS");
+	    break;
+	  }
+	System.out.println ("DO YOU WANT TO USE AGAIN?[Y]yes [N]no");
+	choice = sc.next ().charAt (0);
+      }
+    while (choice == 'y' || choice == 'Y');
+
+
+
+
+
+  }
+}
